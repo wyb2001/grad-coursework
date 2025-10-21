@@ -70,7 +70,7 @@ class DecisionTree:
         return Node(feature=feature, threshold=threshold, left=left, right=right)
 
     def predict(self, x):
-        return [self._search(x, self.root) for x in x]
+        return [self._search(each, self.root) for each in x]
 
     def _search(self, x, tree: Node):
         if tree.is_leaf():
