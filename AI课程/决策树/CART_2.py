@@ -105,22 +105,23 @@ class DecisionTree:
 df = pd.read_csv("heartdisease.csv")
 data = df.to_numpy()
 tot = data.shape[0]
-indices = np.random.permutation(tot)
-r = [0.2, 0.1]
+for EPOCH in range(20):
+    indices = np.random.permutation(tot)
+    r = [0.2, 0.1]
 
-test_len = int(r[0] * tot)
-eval_len = int(r[1] * tot)
+    test_len = int(r[0] * tot)
+    eval_len = int(r[1] * tot)
 
-test_x = data[indices[:test_len], :-1]
-eval_x = data[indices[test_len : test_len + eval_len], :-1]
-train_x = data[indices[test_len + eval_len :], :-1]
-test_y = data[indices[:test_len], -1]
-eval_y = data[indices[test_len : test_len + eval_len], -1]
-train_y = data[indices[test_len + eval_len :], -1]
+    test_x = data[indices[:test_len], :-1]
+    eval_x = data[indices[test_len : test_len + eval_len], :-1]
+    train_x = data[indices[test_len + eval_len :], :-1]
+    test_y = data[indices[:test_len], -1]
+    eval_y = data[indices[test_len : test_len + eval_len], -1]
+    train_y = data[indices[test_len + eval_len :], -1]
 
-
-tree = DecisionTree(min_samples_split=2, max_depth=10)
-tree.fit(train_x, train_y)
-tree.post_prune(tree.root, eval_x, eval_y)
-predictions = tree.predict(test_x)
-print("AC: %.2f%%" % (sum([1 if predictions[i] == test_y[i] else 0 for i in range(test_len)]) / test_len * 100))
+    tree = DecisionTree(min_samples_split=2, max_depth=10)
+    tree.fit(train_x, train_y)
+    tree.post_prune(tree.root, eval_x, eval_y)
+    predictions = tree.predict(test_x)
+    res = sum([1 if predictions[i] == test_y[i] else 0 for i in range(test_len)]) / test_len * 100
+    print("EPOCH %d: %.2f%%" % (EPOCH + 1, res))
