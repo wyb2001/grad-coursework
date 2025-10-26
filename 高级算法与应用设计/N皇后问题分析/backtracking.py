@@ -14,10 +14,16 @@ def dfs(n, t) -> None:
         return
     for i in range(n):
         if not is_used[i]:
-            is_used[i] = True
-            pos[t] = i
-            dfs(n, t + 1)
-            is_used[i] = False
+            valid = True
+            for j in range(t):
+                if j-pos[j] == t-i or j+pos[j]==t+i:
+                    valid = False
+                    break
+            if valid:
+                is_used[i] = True
+                pos[t] = i
+                dfs(n, t + 1)
+                is_used[i] = False
     return
 
 
