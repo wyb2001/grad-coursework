@@ -1,6 +1,3 @@
-EPOCH = 8
-
-
 def judge(q: list[int]) -> bool:
     for i in range(len(q)):
         for j in range(i + 1, len(q)):
@@ -24,9 +21,9 @@ def dfs(n, t) -> None:
     return
 
 
-for n in range(1, EPOCH + 1):
-    cnt = 0
-    is_used = [False] * n
-    pos = [0] * n
-    dfs(n, 0)
-    print(n, cnt)
+n=int(input())
+cnt = 0
+is_used = [False] * n
+pos = [0] * n
+dfs(n, 0)
+print(cnt)

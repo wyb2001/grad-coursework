@@ -1,6 +1,3 @@
-EPOCH = 8
-
-
 def judge(q: list[int]) -> bool:
     for i in range(len(q)):
         for j in range(i + 1, len(q)):
@@ -9,15 +6,15 @@ def judge(q: list[int]) -> bool:
     return True
 
 
-for n in range(1, EPOCH + 1):
-    tot = n**n
-    res = 0
-    for cnt in range(tot):
-        pos = []
-        while cnt:
-            pos.append(cnt % n)
-            cnt //= n
-        pos += (n - len(pos)) * [0]
-        if judge(pos):
-            res += 1
-    print(n, res)
+n=int(input())
+tot = n**n
+res = 0
+for cnt in range(tot):
+    pos = []
+    while cnt:
+        pos.append(cnt % n)
+        cnt //= n
+    pos += (n - len(pos)) * [0]
+    if judge(pos):
+        res += 1
+print(n, res)
